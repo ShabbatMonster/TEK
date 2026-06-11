@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#07080a"/>
+  <rect x="6" y="6" width="500" height="500" rx="92" fill="none" stroke="#1a1d24" stroke-width="6"/>
+  <!-- 3x3 grid: lit cells use module accents, rest are dim -->
+  <g>
+    <!-- row 0 -->
+    <rect x="80"  y="80"  width="104" height="104" rx="18" fill="#00d1ff"/>
+    <rect x="204" y="80"  width="104" height="104" rx="18" fill="#161922"/>
+    <rect x="328" y="80"  width="104" height="104" rx="18" fill="#7b5cff"/>
+    <!-- row 1 -->
+    <rect x="80"  y="204" width="104" height="104" rx="18" fill="#161922"/>
+    <rect x="204" y="204" width="104" height="104" rx="18" fill="#39ff88"/>
+    <rect x="328" y="204" width="104" height="104" rx="18" fill="#161922"/>
+    <!-- row 2 -->
+    <rect x="80"  y="328" width="104" height="104" rx="18" fill="#ff8a00"/>
+    <rect x="204" y="328" width="104" height="104" rx="18" fill="#161922"/>
+    <rect x="328" y="328" width="104" height="104" rx="18" fill="#2dd4bf"/>
+  </g>
+</svg>
