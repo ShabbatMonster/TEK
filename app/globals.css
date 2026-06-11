@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+@theme {
+  --color-void: #07080a;
+  --color-cell: #0c0e12;
+  --color-cell2: #11141a;
+  --color-line: #1a1d24;
+  --color-fg: #e8eaf0;
+  --color-dim: #6b7280;
+  --color-up: #2fd97b;
+  --color-down: #ff4d5e;
+  --color-warn: #ffb224;
+
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+:root {
+  --tek-gap: 6px;
+  --tek-radius: 8px;
+  --tek-chrome-h: 26px;
+  --tek-statusbar-h: 30px;
+  --tek-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  /* global UI scale — bump for a more zoomed-in workstation feel */
+  --tek-zoom: 1.6;
+}
+
+html {
+  zoom: var(--tek-zoom);
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-void);
+  color: var(--color-fg);
+  font-size: 13px;
+}
+
+/* Root shell is sized down by the zoom factor so the zoomed render fills the
+   real viewport exactly — keeps the no-scroll 3x3 grid intact while scaling
+   all content up. */
+.kernel-shell {
+  height: calc(100dvh / var(--tek-zoom));
+  width: calc(100dvw / var(--tek-zoom));
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--m-accent, #2a2e38) transparent;
+}
+*::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--m-accent, #2a2e38);
+  border-radius: 2px;
+}
+
+/* numbers everywhere are tabular */
+.tnum {
+  font-variant-numeric: tabular-nums slashed-zero;
+}
+
+/* faint noise on the void */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.02;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+
+/* ---------------- module identities ---------------- */
+/* Each module cell carries data-module; theme vars cascade from here. */
+
+[data-module="launchpad"] {
+  --m-accent: #ff8a00;
+  --m-accent2: #ff3d00;
+  --m-glow: rgba(255, 138, 0, 0.14);
+  --m-font: var(--font-rajdhani), sans-serif;
+}
+[data-module="swap"] {
+  --m-accent: #00d1ff;
+  --m-accent2: #2563eb;
+  --m-glow: rgba(0, 209, 255, 0.12);
+  --m-font: var(--font-geist), sans-serif;
+}
+[data-module="shadowswap"] {
+  --m-accent: #7b5cff;
+  --m-accent2: #3b2d80;
+  --m-glow: rgba(123, 92, 255, 0.14);
+  --m-font: var(--font-space-mono), monospace;
+}
+[data-module="incinerator"] {
+  --m-accent: #ff3b1f;
+  --m-accent2: #7a1f10;
+  --m-glow: rgba(255, 59, 31, 0.13);
+  --m-font: var(--font-archivo-black), sans-serif;
+}
+[data-module="radar"] {
+  --m-accent: #39ff88;
+  --m-accent2: #0c5c33;
+  --m-glow: rgba(57, 255, 136, 0.1);
+  --m-font: var(--font-vt323), monospace;
+}
+[data-module="oracle"] {
+  --m-accent: #a78bfa;
+  --m-accent2: #5eead4;
+  --m-glow: rgba(167, 139, 250, 0.13);
+  --m-font: var(--font-newsreader), serif;
+}
+[data-module="forge"] {
+  --m-accent: #ffd60a;
+  --m-accent2: #9aa3b2;
+  --m-glow: rgba(255, 214, 10, 0.09);
+  --m-font: var(--font-jetbrains), monospace;
+}
+[data-module="perps"] {
+  --m-accent: #ffb224;
+  --m-accent2: #0a1228;
+  --m-glow: rgba(255, 178, 36, 0.08);
+  --m-font: var(--font-geist-mono), monospace;
+}
+[data-module="signal"] {
+  --m-accent: #2dd4bf;
+  --m-accent2: #ff6ec7;
+  --m-glow: rgba(45, 212, 191, 0.12);
+  --m-font: var(--font-silkscreen), monospace;
+}
+
+.m-display {
+  font-family: var(--m-font);
+}
+.m-accent {
+  color: var(--m-accent);
+}
+
+/* radar scanlines */
+.scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(57, 255, 136, 0.04) 0px,
+    rgba(57, 255, 136, 0.04) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* forge blueprint grid */
+.blueprint {
+  background-image: linear-gradient(rgba(154, 163, 178, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(154, 163, 178, 0.05) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+/* launchpad hazard stripes */
+.hazard {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 138, 0, 0.12) 0 8px,
+    transparent 8px 16px
+  );
+}
+
+/* signal halftone */
+.halftone {
+  background-image: radial-gradient(rgba(45, 212, 191, 0.07) 1px, transparent 1px);
+  background-size: 7px 7px;
+}
+
+/* oracle aurora */
+@keyframes aurora-drift {
+  0% { transform: translate(-8%, -4%) rotate(0deg); }
+  50% { transform: translate(6%, 5%) rotate(8deg); }
+  100% { transform: translate(-8%, -4%) rotate(0deg); }
+}
+.aurora {
+  position: absolute;
+  inset: -30%;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 40% 30% at 30% 40%, rgba(167, 139, 250, 0.12), transparent 70%),
+    radial-gradient(ellipse 35% 28% at 70% 60%, rgba(94, 234, 212, 0.09), transparent 70%);
+  animation: aurora-drift 16s ease-in-out infinite;
+}
+
+@keyframes tek-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.tek-pulse {
+  animation: tek-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes flash-up {
+  0% { color: var(--color-up); }
+  100% { color: inherit; }
+}
+@keyframes flash-down {
+  0% { color: var(--color-down); }
+  100% { color: inherit; }
+}
+.flash-up { animation: flash-up 0.7s ease-out; }
+.flash-down { animation: flash-down 0.7s ease-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora, .tek-pulse { animation: none; }
+}

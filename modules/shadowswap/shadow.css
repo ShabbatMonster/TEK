@@ -1,0 +1,63 @@
+/* ShadowSwap — counter-surveillance terminal theme bits */
+
+/* faint animated static field (CSS only, very subtle) */
+@keyframes shadow-static-shift {
+  0% {
+    background-position: 0 0;
+  }
+  25% {
+    background-position: -38px 21px;
+  }
+  50% {
+    background-position: 17px -44px;
+  }
+  75% {
+    background-position: -29px -13px;
+  }
+  100% {
+    background-position: 41px 33px;
+  }
+}
+
+.shadow-static {
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23s)' opacity='1'/%3E%3C/svg%3E");
+  animation: shadow-static-shift 0.9s steps(4) infinite;
+}
+
+/* slow horizontal interference band drifting down the panel */
+@keyframes shadow-band-drift {
+  0% {
+    transform: translateY(-20%);
+  }
+  100% {
+    transform: translateY(520%);
+  }
+}
+
+.shadow-band {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 18%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(123, 92, 255, 0.05),
+    transparent
+  );
+  animation: shadow-band-drift 7s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shadow-static {
+    animation: none;
+  }
+  .shadow-band {
+    animation: none;
+    display: none;
+  }
+}
