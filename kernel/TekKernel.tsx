@@ -8,6 +8,7 @@ import { fireWalletResets } from "./store";
 import { bus } from "./bus";
 import { GridEngine } from "./GridEngine";
 import { StatusBar } from "./StatusBar";
+import { CaBanner } from "./CaBanner";
 import { HotkeyManager } from "./HotkeyManager";
 import { CommandPalette } from "./CommandPalette";
 import { CheatSheet } from "./CheatSheet";
@@ -49,6 +50,7 @@ export default function TekKernel() {
           <WalletChangeWatcher />
           <HotkeyManager />
           <div className="kernel-shell flex flex-col bg-void p-[var(--tek-gap)]">
+            <CaBanner />
             <StatusBar />
             <GridEngine />
           </div>
