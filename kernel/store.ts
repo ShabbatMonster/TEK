@@ -16,11 +16,13 @@ interface KernelStore {
   hovered: ModuleId | null;
   paletteOpen: boolean;
   cheatOpen: boolean;
+  manifestoOpen: boolean;
   txs: TrackedTx[];
   focus: (id: ModuleId | null) => void;
   setHovered: (id: ModuleId | null) => void;
   setPaletteOpen: (open: boolean) => void;
   setCheatOpen: (open: boolean) => void;
+  setManifestoOpen: (open: boolean) => void;
   trackTx: (tx: TrackedTx) => void;
   updateTx: (signature: string, status: TrackedTx["status"]) => void;
 }
@@ -30,11 +32,15 @@ export const useKernelStore = create<KernelStore>((set) => ({
   hovered: null,
   paletteOpen: false,
   cheatOpen: false,
+  // The article overlay greets every fresh page open; TekKernel is client-only
+  // (ssr:false) so this never causes a hydration mismatch.
+  manifestoOpen: true,
   txs: [],
   focus: (id) => set({ focused: id, paletteOpen: false }),
   setHovered: (id) => set({ hovered: id }),
   setPaletteOpen: (open) => set({ paletteOpen: open }),
   setCheatOpen: (open) => set({ cheatOpen: open }),
+  setManifestoOpen: (open) => set({ manifestoOpen: open }),
   trackTx: (tx) => set((s) => ({ txs: [tx, ...s.txs].slice(0, 30) })),
   updateTx: (signature, status) =>
     set((s) => ({

@@ -12,6 +12,7 @@ import { CaBanner } from "./CaBanner";
 import { HotkeyManager } from "./HotkeyManager";
 import { CommandPalette } from "./CommandPalette";
 import { CheatSheet } from "./CheatSheet";
+import { Manifesto } from "./Manifesto";
 import { ToastOS } from "./ToastOS";
 
 function WalletChangeWatcher() {
@@ -56,6 +57,7 @@ export default function TekKernel() {
           </div>
           <CommandPalette />
           <CheatSheet />
+          <Manifesto />
           <ToastOS />
         </WalletProvider>
       </ConnectionProvider>

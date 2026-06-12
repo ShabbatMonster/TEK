@@ -141,6 +141,7 @@ function WalletPill() {
 export function StatusBar() {
   const setPaletteOpen = useKernelStore((s) => s.setPaletteOpen);
   const setCheatOpen = useKernelStore((s) => s.setCheatOpen);
+  const setManifestoOpen = useKernelStore((s) => s.setManifestoOpen);
   return (
     <header className="flex h-[var(--tek-statusbar-h)] shrink-0 items-center gap-3 rounded-[var(--tek-radius)] border border-line bg-cell px-3">
       <button
@@ -156,6 +157,13 @@ export function StatusBar() {
       <SlotClock />
       <div className="ml-auto flex items-center gap-2">
         <TxMonitor />
+        <button
+          onClick={() => setManifestoOpen(true)}
+          className="rounded border border-line px-2 py-0.5 font-mono text-[10px] text-dim hover:text-fg"
+          title="What is TEK?"
+        >
+          READ.ME
+        </button>
         <button
           onClick={() => setCheatOpen(true)}
           className="rounded border border-line px-2 py-0.5 font-mono text-[10px] text-dim hover:text-fg"

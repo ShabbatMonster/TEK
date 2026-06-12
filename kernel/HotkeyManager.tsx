@@ -35,6 +35,7 @@ export function HotkeyManager() {
       if (e.key === "Escape") {
         if (s.paletteOpen) return s.setPaletteOpen(false);
         if (s.cheatOpen) return s.setCheatOpen(false);
+        if (s.manifestoOpen) return s.setManifestoOpen(false);
         if (s.focused) return s.focus(null);
         return;
       }
