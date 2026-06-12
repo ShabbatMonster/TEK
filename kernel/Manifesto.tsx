@@ -36,18 +36,21 @@ export function Manifesto() {
       className="fixed inset-0 z-[95] flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
       onClick={() => setOpen(false)}
     >
+      {/* html carries zoom:1.6, so vh/vw units overshoot the real screen —
+          size the panel as a percentage of the overlay, which fixed inset-0
+          resolves correctly. */}
       <div
-        className="max-h-[88vh] w-[720px] max-w-[94vw] overflow-y-auto rounded-xl border border-line bg-cell p-6"
+        className="max-h-[80%] w-[480px] max-w-[88%] overflow-y-auto rounded-xl border border-line bg-cell p-4"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="mb-1 font-mono text-[10px] uppercase tracking-[0.3em] text-dim">
+        <div className="mb-1 font-mono text-[9px] uppercase tracking-[0.3em] text-dim">
           TEK · READ.ME
         </div>
-        <h1 className="font-mono text-xl font-bold tracking-[0.2em] text-fg">
+        <h1 className="font-mono text-base font-bold tracking-[0.2em] text-fg">
           THE EVERYTHING KERNEL
         </h1>
 
-        <div className="mt-4 space-y-3 text-[12px] leading-relaxed text-fg/90">
+        <div className="mt-3 space-y-2.5 text-[11px] leading-relaxed text-fg/90">
           <p>
             <span className="text-fg font-bold">tek.cash</span> is a Solana operating
             system that fits in one viewport. Nine independent applications — a token
@@ -68,19 +71,19 @@ export function Manifesto() {
           </p>
         </div>
 
-        <div className="mt-5 grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <div className="mt-4 grid grid-cols-2 gap-1.5">
           {MODULES.map((m) => (
-            <div key={m.id} data-module={m.id} className="rounded border border-line p-2.5">
-              <div className="m-accent mb-1 flex items-baseline gap-2 font-mono text-[10px] uppercase tracking-widest">
+            <div key={m.id} data-module={m.id} className="rounded border border-line p-2">
+              <div className="m-accent mb-0.5 flex items-baseline gap-1.5 font-mono text-[9px] uppercase tracking-widest">
                 <span>{m.glyph}</span>
                 <span className="font-bold">{m.title}</span>
               </div>
-              <p className="text-[11px] leading-snug text-dim">{TECH[m.id]}</p>
+              <p className="text-[10px] leading-snug text-dim">{TECH[m.id]}</p>
             </div>
           ))}
         </div>
 
-        <p className="mt-5 text-[12px] leading-relaxed text-fg/90">
+        <p className="mt-4 text-[11px] leading-relaxed text-fg/90">
           Under the hood it&apos;s a kernel in the honest sense — a thin shared layer
           every module plugs into. Each cell is a sandboxed mini-app with its own state
           store and visual identity; the kernel owns the wallet adapter context, the
@@ -90,12 +93,12 @@ export function Manifesto() {
           no module ever touches a private key.
         </p>
 
-        <div className="mt-5 flex flex-wrap items-center gap-3 border-t border-line pt-4">
-          <span className="font-mono text-[9px] uppercase tracking-widest text-dim">CA</span>
-          <span className="truncate font-mono text-[10px] text-fg">{CA}</span>
+        <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-line pt-3">
+          <span className="font-mono text-[8px] uppercase tracking-widest text-dim">CA</span>
+          <span className="truncate font-mono text-[9px] text-fg">{CA}</span>
           <button
             onClick={() => setOpen(false)}
-            className="ml-auto rounded border border-line bg-cell2 px-4 py-1 font-mono text-[11px] uppercase tracking-widest text-fg hover:border-up hover:text-up"
+            className="ml-auto rounded border border-line bg-cell2 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-fg hover:border-up hover:text-up"
           >
             Enter the kernel →
           </button>
